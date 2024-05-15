@@ -40,16 +40,16 @@ export const VoteComponent = ({ data, onVoteButtonClick }) => {
     return (
         <div className="container events-container">
             {!showCards && (
-                <button className='button-89 vote-button' onClick={handleButtonClick}><h3>Start Voting</h3></button>
-            )}
+                <div className="game15"><button className='button-89 vote-button' onClick={handleButtonClick}><h3>Start Voting</h3></button>
+                </div>)}
             {showCards && (
 
                 <div className="fit1134">
 
-                    <div className="event"><div className="event-containerx fit1134">
+                    <div className="event"><div className="event-containerx data11win">
                         {Object.keys(data).map(key => (
 
-                            <div className="container112 event-detailsx event-detailse">
+                            <div className="container112 event-detailsx event-detailse datafit11" >
                                 <div className="wrapper112">
                                     <div className="banner-image" style={{
                                         backgroundImage: `url(${array[key]})`
