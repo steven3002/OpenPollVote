@@ -12,7 +12,7 @@ export function EventsContainer({ data1 }) {
 
     return (
         <>
-            <div className="container events-container">
+            <div className="container events-container game14">
                 <div id="events-list">
                     <div className="event">
                         <div className="event-containerx">
