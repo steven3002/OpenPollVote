@@ -105,7 +105,7 @@ a {
 
   
 .container {
-  max-width: 840px;
+  max-width: 711px;
   margin: 0 auto;
   padding: 7px;
 }
@@ -238,6 +238,7 @@ p{
 .button-89:active {
   background: var(--color);
   color: #fff;
+  
 }
 
 
@@ -439,4 +440,16 @@ padding: 12px 20px !important;
   align-items: center;
   margin-left: 50px;
   transform: scale(0.95);
+}
+
+.datafit11{
+  height: 600px;
+  width: 800px;
+  transform: scale(0.9);
+}
+.game14{
+  transform: scale(0.9);
+}
+.game15{
+  margin-left: auto;
 }
