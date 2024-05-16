@@ -1,3 +1,9 @@
+  .subbody{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+  }
+  
   
   .container {
     max-width: 800px;
