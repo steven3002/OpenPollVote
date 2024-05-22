@@ -1,5 +1,5 @@
 const contractPerNetwork = {
-  testnet: 'spiffy-chairs.testnet',
+  testnet: 'level-carriage.testnet',
 };
 
 export const NetworkId = 'testnet';

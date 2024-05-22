@@ -1,5 +1,3 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import NearLogo from '/public/near-logo.svg';

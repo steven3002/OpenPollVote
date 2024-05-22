@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useStore } from '@/layout';
 import { HelloNearContract } from '../config';
 
-import { VoteComponent } from '@/event/vote'
+import { TodoApp } from '@/todoMain/todo';
 
 
 
@@ -12,48 +12,70 @@ const CONTRACT = HelloNearContract;
 
 export default function Home() {
   const { signedAccountId, wallet } = useStore();
-
-  const [greeting, setGreeting] = useState('loading...');
-  const [newGreeting, setNewGreeting] = useState('loading...');
+  const [greeting, setGreeting] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
-    if (!wallet) return;
-
-    wallet.viewMethod({ contractId: CONTRACT, method: 'list_polls' })
-      .then(greeting => setGreeting(greeting));
-  }, [wallet]);
+    if (!signedAccountId) { return }
+    else {
+      data1()
+    };
+  }, [signedAccountId]);
 
   useEffect(() => {
     setLoggedIn(!!signedAccountId);
+    data1
+    console.log(signedAccountId)
   }, [signedAccountId]);
-  console.log(greeting)
-  const handleVoteButtonClick = async (eventId) => {
+
+
+
+
+  const data1 = async () => {
     setShowSpinner(true);
-    await wallet.callMethod({ contractId: CONTRACT, method: 'add_vote', args: { id: eventId } });
-    const eventList = await wallet.viewMethod({ contractId: CONTRACT, method: 'list_polls' });
-    setGreeting(eventList);
-    setShowSpinner(false); // Change to false to hide the spinner after updating the event list
-  };
+    let data = await wallet.callMethod({ contractId: CONTRACT, method: 'list_todos', args: {} });
+    setGreeting(data)
+    console.log(data)
+    setShowSpinner(false);
+  }
+  const handleDeleteM = async (index) => {
+    setShowSpinner(true);
+    await wallet.callMethod({ contractId: CONTRACT, method: 'delete_todo', args: { id: index } })
+    let data = await wallet.callMethod({ contractId: CONTRACT, method: 'list_todos', args: {} });
+    setGreeting(data)
+    console.log(data)
+    setShowSpinner(false);
+  }
 
-
-
-
-
+  const handleCompleted = async (index) => {
+    setShowSpinner(true);
+    await wallet.callMethod({ contractId: CONTRACT, method: 'set_completed', args: { id: index } })
+    let data = await wallet.callMethod({ contractId: CONTRACT, method: 'list_todos', args: {} });
+    setGreeting(data)
+    console.log(data)
+    setShowSpinner(false);
+  }
+  const handleinputvalue = async (value) => {
+    setShowSpinner(true);
+    await wallet.callMethod({ contractId: CONTRACT, method: 'add_todo', args: { text: value } })
+    let data = await wallet.callMethod({ contractId: CONTRACT, method: 'list_todos', args: {} });
+    setGreeting(data)
+    console.log(data)
+    setShowSpinner(false);
+  }
 
 
 
   return (
     <>
       <div className="w-100 text-end align-text-center" hidden={loggedIn}>
-        <p> Please login to vote</p>
+        <h3>Please login</h3>
 
       </div>
+
       <div className='subbody' hidden={!loggedIn}>
-        <VoteComponent data={greeting} onVoteButtonClick={handleVoteButtonClick} />
-
-
+        <TodoApp todoData={greeting} handleDelete={handleDeleteM} handleCompleted={handleCompleted} handleInputValue={handleinputvalue} />
       </div>
     </>
   );
